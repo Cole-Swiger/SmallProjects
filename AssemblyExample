@@ -1,0 +1,15 @@
+; Program 1.asm
+;
+; Created: 11/17/2019
+; Author: Cole Swiger
+; Put numbers in registers 16, 17, and 18
+; Then put the sum in register 3.
+
+   .INCLUDE "M32DEF.INC"
+   .ORG 0x0000
+   LDI R16, 0x42
+   LDI R17, 0x66
+   LDI R18, 0x3A
+   ADD R16, R17
+   ADD R16, R18
+   MOV R3, R16
