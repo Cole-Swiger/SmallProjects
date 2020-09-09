@@ -1,0 +1,63 @@
+; 
+; Program 2.asm
+;
+; Created: 12/14/2019
+; Author: Cole Swiger
+;
+; For this problem, I was asked to take 2 temperature values in F
+; and convert to C and take the average. I then had to check if the average
+; was within certain reanges and take different actions according to the conditions.
+;
+
+   .INCLUDE "M32DEF.INC"
+   .ORG 0x0000
+   .DEF DENOM = R17
+   .DEF QUOTIENT = R18        ;setting up division
+   
+   LDI R30, $FF
+   OUT DDRD, R30
+   OUT DDRB, R30
+   OUT DDRC, R30              ;setting Ports for output
+   
+   LDI R26, 104
+   LDI R27, 107               ;These values can be changed
+   ADD R26, R27
+   lsr R26                    ;store average in R26
+   
+   MOV R27, R26
+   SUBI R27, 32               ;subtract 32 and then divide by 9
+   LDI DENOM, 9
+   CLR QUOTIENT
+L1: INC QUOTIENT
+   SUB R27, DENOM
+   BRCC L1
+   DEC QUOTIENT               ;ignore the remainder
+   LDI R22, 5
+   MUL QUOTIENT               ;multiply by 5
+   MOV R27, R0                ;store in R27
+   
+   MOV R28, R27
+   LDI R19, 21
+   CP R28, R19
+   BRLO LOWER                 ;check if less than 21
+   
+   LDI R19, 38
+   CP R28, R19
+   BRCC HIGHER                ;check if more than 37
+   RJMP NEITHER
+   
+   ;Send different values to different Ports depending on which condition is met.
+   
+LOWER: LDI R16, $D7
+   OUT PORTB, R16
+   RJMP HERE
+   
+HIGHER: LDI R16, $18
+   OUT PORTD, R16
+   RJMP HERE
+   
+NEITHER: LDI R16, $3C
+   OUT PORTC, R16
+   RJMP HERE
+   
+HERE: RJMP HERE
