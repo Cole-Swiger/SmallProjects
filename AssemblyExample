@@ -1,9 +1,12 @@
+;
 ; Program 1.asm
 ;
 ; Created: 11/17/2019
 ; Author: Cole Swiger
+;
 ; Put numbers in registers 16, 17, and 18
 ; Then put the sum in register 3.
+;
 
    .INCLUDE "M32DEF.INC"
    .ORG 0x0000
