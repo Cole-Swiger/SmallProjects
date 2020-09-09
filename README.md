@@ -1,6 +1,4 @@
 # SmallProjects
-A collection of small classes/programs I made while in college.
+A couple of small Assembly classes I made for class
 
-
-None of these classes are connected or will work together, 
-it is just easier to put them all together.
+These classes aren't connected, I just put them here together
